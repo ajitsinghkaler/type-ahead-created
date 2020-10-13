@@ -19,9 +19,7 @@ const getContinents = keys =>
   ].filter(e => e.indexOf(keys.toLowerCase()) > -1);
 
 const fakeContinentsRequest = keys =>
-  of(getContinents(keys)).pipe(
-    tap(_ => console.log(`API CALL at ${new Date()}`))
-  );
+  of(getContinents(keys));
 
 fromEvent(document.getElementById('type-ahead'), 'keyup')
   .pipe(

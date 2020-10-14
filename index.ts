@@ -18,15 +18,12 @@ const getContinents = keys =>
     'south america'
   ].filter(e => e.indexOf(keys.toLowerCase()) > -1);
 
-const fakeContinentsRequest = keys =>
-  of(getContinents(keys));
-
 fromEvent(document.getElementById('type-ahead'), 'keyup')
   .pipe(
     debounceTime(200),
     map((e: any) => e.target.value),
     distinctUntilChanged(),
-    switchMap(fakeContinentsRequest),
+    map(getContinents),
     tap(c => (document.getElementById('output').innerText = c.join('\n')))
   )
   .subscribe();
